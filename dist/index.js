@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,46 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-function fetchJoke() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch("https://icanhazdadjoke.com/", {
-                headers: { Accept: "application/json" },
-            });
-            // check if the response is of the correct type
-            const data = yield response.json();
-            const joke = document.getElementById("joke");
-            if (joke) {
-                joke.innerText = `"${data.joke}"`;
-            }
-            console.log(data.joke);
-        }
-        catch (error) {
-            console.error("Error fetching joke:", error);
-        }
-    });
-}
-fetchJoke();
-const button = document.getElementById("next-joke");
-button === null || button === void 0 ? void 0 : button.addEventListener("click", fetchJoke);
-const reportJokes = [];
-function addJoke(jokeText, score) {
-    const existingJoke = reportJokes.find((item) => item.joke === jokeText);
-    if (existingJoke) {
-        existingJoke.score = score;
-        existingJoke.date = new Date().toISOString();
-    }
-    else {
-        const newJoke = {
-            joke: jokeText,
-            score: score,
-            date: new Date().toISOString(),
-        };
-        reportJokes.push(newJoke);
-    }
-    console.log(reportJokes);
-}
-document.addEventListener("DOMContentLoaded", () => {
+import { fetchJoke } from "./jokes.js";
+import { addJoke } from "./jokeScores.js";
+import { fetchWeather, displayWeather } from "./weather.js";
+document.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
+    fetchJoke();
+    const button = document.getElementById("next-joke");
+    button === null || button === void 0 ? void 0 : button.addEventListener("click", fetchJoke);
     const voteButtons = document.querySelectorAll(".vote-button");
     voteButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -57,4 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
             addJoke(jokeText, score);
         });
     });
-});
+    const latitude = 41.38701852240342;
+    const longitude = 2.170115070045013;
+    const weatherData = yield fetchWeather(latitude, longitude);
+    displayWeather(weatherData);
+}));

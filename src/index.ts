@@ -14,10 +14,11 @@ async function fetchJoke(): Promise<void> {
     // check if the response is of the correct type
     const data: JokeResponse = await response.json();
 
-    const app = document.getElementById("app");
-    if (app) {
-      app.innerText = data.joke;
+    const joke = document.getElementById("joke");
+    if (joke) {
+      joke.innerText = `"${data.joke}"`;
     }
+    console.log(data.joke);
   } catch (error) {
     console.error("Error fetching joke:", error);
   }

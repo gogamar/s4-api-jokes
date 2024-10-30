@@ -30,3 +30,31 @@ function fetchJoke() {
 fetchJoke();
 const button = document.getElementById("next-joke");
 button === null || button === void 0 ? void 0 : button.addEventListener("click", fetchJoke);
+const reportJokes = [];
+function addJoke(jokeText, score) {
+    const existingJoke = reportJokes.find((item) => item.joke === jokeText);
+    if (existingJoke) {
+        existingJoke.score = score;
+        existingJoke.date = new Date().toISOString();
+    }
+    else {
+        const newJoke = {
+            joke: jokeText,
+            score: score,
+            date: new Date().toISOString(),
+        };
+        reportJokes.push(newJoke);
+    }
+    console.log(reportJokes);
+}
+document.addEventListener("DOMContentLoaded", () => {
+    const voteButtons = document.querySelectorAll(".vote-button");
+    voteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            var _a;
+            const jokeText = ((_a = document.getElementById("joke")) === null || _a === void 0 ? void 0 : _a.innerText) || "";
+            const score = parseInt(button.getAttribute("data-score") || "0", 10);
+            addJoke(jokeText, score);
+        });
+    });
+});

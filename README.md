@@ -71,7 +71,7 @@ Open `index.html` in your browser to view the app.
 - **Implementation Details**:
   - Display three rating buttons (1, 2, or 3).
   - Allow users to rate each joke (optional).
-  - Store the joke, rating, and date in `reportAcudits` and log the updated array to the console.
+  - Store the joke, rating, and date in `reportJokes` and log the updated array to the console.
   - Users can change the rating before moving to the next joke.
 
 ### Exercise 4

@@ -42,6 +42,37 @@ body {
   /* Darker turquoise on hover */
 }
 
+.vote-button {
+  background-color: #007BFF;
+  /* Blue color */
+  color: white;
+  /* Text color */
+  padding: 10px 15px;
+  /* Padding */
+  border: none;
+  /* No border */
+  border-radius: 5px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Pointer on hover */
+  font-size: 1em;
+  /* Font size */
+  transition: background-color 0.3s;
+  /* Smooth transition */
+}
+
+.vote-button:hover {
+  background-color: #0056b3;
+  /* Darker blue on hover */
+}
+
+.vote-button:focus {
+  outline: none;
+  /* Remove outline on focus */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  /* Add focus ring */
+}
+
 @media (max-width: 768px) {
   .card {
     width: 80%;

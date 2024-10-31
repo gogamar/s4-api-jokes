@@ -7,13 +7,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { fetchJoke } from "./jokes.js";
+import { fetchJoke, changeBackground } from "./jokeApi.js";
 import { addJoke } from "./jokeScores.js";
-import { fetchWeather, displayWeather } from "./weather.js";
+import { fetchWeather, displayWeather } from "./weatherApi.js";
 document.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, void 0, function* () {
     fetchJoke();
     const button = document.getElementById("next-joke");
-    button === null || button === void 0 ? void 0 : button.addEventListener("click", fetchJoke);
+    button === null || button === void 0 ? void 0 : button.addEventListener("click", () => {
+        const scoreElement = document.getElementById("score");
+        if (scoreElement) {
+            scoreElement.innerText = "Vota l'acudit!";
+        }
+        changeBackground();
+        fetchJoke();
+    });
     const voteButtons = document.querySelectorAll(".vote-button");
     voteButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -23,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(void 0, void 0, vo
             addJoke(jokeText, score);
         });
     });
+    // Barcelona coordinates
     const latitude = 41.38701852240342;
     const longitude = 2.170115070045013;
     const weatherData = yield fetchWeather(latitude, longitude);

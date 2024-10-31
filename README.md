@@ -29,7 +29,7 @@ npx tsc
 
 ### 4. Run the Project
 
-Open `index.html` in your browser to view the app.
+In VS code right click on `index.html` and select "Open with Live Server".
 
 ---
 
